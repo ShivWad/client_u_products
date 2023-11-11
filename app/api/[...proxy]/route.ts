@@ -1,11 +1,10 @@
 import { cookies } from 'next/headers'
+const BASE_URL = "http://localhost:4000";
 
 export async function POST(request: Request) {
-  let path = request.url;
-  let mainUrl = "";
-  if (path.includes("/api/login")) {
-    mainUrl = 'http://localhost:4000/api/user/login';
-  }
+  let url = new URL(request.url);
+  let mainUrl = BASE_URL + url.pathname;
+  console.log("calling>>", mainUrl);
   let body = await request.json();
   const res = await fetch(mainUrl, {
     method: 'POST',
@@ -14,24 +13,16 @@ export async function POST(request: Request) {
     },
     body: JSON.stringify(body),
   });
-  console.log(res.status);
   const data = await res.json();
-  console.log(data);
   const cookieStore = cookies();
   cookieStore.set({ name: "sesAuth", value: res.headers.getSetCookie()[0], httpOnly: true });
   return new Response(JSON.stringify(data), { status: res.status });
 }
 
 export async function GET(request: Request) {
-  let path = request.url;
-  let mainUrl = "";
-  if (path.includes("/api/user")) {
-    mainUrl = "http://localhost:4000/api/user/all";
-  }
-  else if (path.includes("/api/categories")) {
-    mainUrl = "http://localhost:4000/api/categories";
-  }
-
+  let url = new URL(request.url);
+  let mainUrl = BASE_URL + url.pathname;
+  console.log("calling>>", mainUrl);
   const cookieStore = cookies();
   const token = cookieStore.get("sesAuth");
   let reqOptions: RequestInit;
@@ -49,13 +40,11 @@ export async function GET(request: Request) {
   else {
     reqOptions = {
       headers: {
+
       },
     }
   }
-
   const res = await fetch(mainUrl, reqOptions);
-
   let data = await res.json();
   return new Response(JSON.stringify(data), { status: res.status });
-
 }

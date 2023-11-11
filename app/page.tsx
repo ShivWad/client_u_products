@@ -23,13 +23,13 @@ export default async function Home() {
       </header>
       <main>
         <input type='text' className='search-bar' />
-        <select>
+        <select className="category-select" placeholder="Select Category">
           {categoryJson.categories.map((category, index) => {
             return <>
-              <optgroup key={`${category.name}_${index}`} label={category.name}>
+              <optgroup className="category-opt-group" key={`${category.name}_${index}`} label={category.name}>
                 {category.subcategories.map((subCategory, i) => {
                   return <>
-                    <option value={subCategory}>{subCategory}</option>
+                    <option key={`${subCategory}_${i}`} className="category-option" value={subCategory}>{subCategory}</option>
                   </>
                 })}
               </optgroup  >

@@ -4,5 +4,16 @@ body {
 
 
 .search-bar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 599px;
 }
+
+
+.category-select {}
+
+.category-opt-group {}
+
+.category-option {}

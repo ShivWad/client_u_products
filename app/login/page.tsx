@@ -22,7 +22,7 @@ const page = () => {
             credentials: "same-origin"
         };
 
-        let res = await fetch("/api/login", requestOptions);
+        let res = await fetch("/api/user/login", requestOptions);
         // let cookieStore = cookies();
         // cookieStore.set("EXSESID", )
 
@@ -31,9 +31,19 @@ const page = () => {
     };
 
     const test = async () => {
-        let res = await fetch("/api/user");
+        let res = await fetch("/api/user/all");
 
-        
+
+        let responseJson = await res.json();
+        console.log(responseJson);
+    };
+
+
+
+    const logout = async () => {
+        let res = await fetch("/api/user/logout");
+
+
         let responseJson = await res.json();
         console.log(responseJson);
     };
@@ -45,6 +55,8 @@ const page = () => {
             <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
             <button onClick={() => handleLogin()}>Login</button>
             <button onClick={() => test()}>TEST</button>
+            <button onClick={() => logout()}>LOGOUT</button>
+
         </div>
     )
 }
