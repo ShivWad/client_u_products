@@ -11,12 +11,8 @@ type USER = {
 }
 
 const handleGetAllUser = async (): Promise<USER> => {
-    let res = await fetch("http://localhost:3000/api/user");
-
-
-
+    let res = await fetch("http://localhost:3000/api/user/all");
     let responseJson = await res.json();
-    console.log(responseJson);
     return responseJson;
 }
 
