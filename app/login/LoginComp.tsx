@@ -35,12 +35,8 @@ const LoginComp = () => {
         console.log(responseJson);
     };
 
-
-
     const logout = async () => {
         let res = await fetch("/api/user/logout");
-
-
         let responseJson = await res.json();
         console.log(responseJson);
     };
