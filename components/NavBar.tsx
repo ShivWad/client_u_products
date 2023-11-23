@@ -1,11 +1,12 @@
 'use client'
-
 import React, { useState } from 'react'
 import { TCategories, TLocations } from '@/types'
 import Image from 'next/image'
 import logo from "../public/recycle.png";
 import searchIcon from "../public/search.png"
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import styles from './components.module.css'
 const NavBar = ({ categoryJson, locationsJson }: { categoryJson: TCategories, locationsJson: TLocations }) => {
 
 
@@ -19,36 +20,40 @@ const NavBar = ({ categoryJson, locationsJson }: { categoryJson: TCategories, lo
         router.push(filter);
     }
     return (
-        <nav className='root-navbar'>
-            <Image src={logo} height={20} alt='logo' />
-            <select onChange={(e) => setCategory(e.target.value)} className="custom-select" >
-                {Object.keys(locationsJson).map((state, index) => {
-                    return <>
-                        <optgroup className="category-opt-group" key={`${state}_${index}`} label={state}>
-                            {locationsJson[state].map((city, i) => {
-                                return <>
-                                    <option key={`${city}_${i}`} className="category-option" value={city}>{city}</option>
-                                </>
-                            })}
-                        </optgroup  >
-                    </>
-                })}
-            </select >
-            <select onChange={(e) => setCategory(e.target.value)} className="custom-select" >
-                {categoryJson.categories.map((category, index) => {
-                    return <>
-                        <optgroup className="category-opt-group" key={`${category.name}_${index}`} label={category.name}>
-                            {category.subcategories.map((subCategory, i) => {
-                                return <>
-                                    <option key={`${subCategory}_${i}`} className="category-option" value={subCategory}>{subCategory}</option>
-                                </>
-                            })}
-                        </optgroup  >
-                    </>
-                })}
-            </select >
-            <input type='text' onChange={(e) => setSearchQuery((e.target as HTMLInputElement).value)} className='search-bar' />
-            <Image height={20} style={{ cursor: "pointer" }} onClick={() => handleSearch()} src={searchIcon} alt='search ico' />
+        <nav className={styles['main-nav']}>
+            <Image src={logo} height={20} alt='logo' className='logo' />
+            <div className={styles['nav-inner-div']}>
+                <div className={styles['nav-inner-div-dropdown']}>
+                    <select onChange={(e) => setCategory(e.target.value)} className={styles["custom-select"]} >
+                        {Object.keys(locationsJson).map((state, index) => {
+                            return <>
+                                <optgroup className={styles["category-opt-group"]} key={`${state}_${index}`} label={state}>
+                                    {locationsJson[state].map((city, i) => {
+                                        return <>
+                                            <option key={`${city}_${i}`} className={styles["category-option"]} value={city}>{city}</option>
+                                        </>
+                                    })}
+                                </optgroup  >
+                            </>
+                        })}
+                    </select >
+                    <select onChange={(e) => setCategory(e.target.value)} className={styles["custom-select"]} >
+                        {categoryJson.categories.map((category, index) => {
+                            return <>
+                                <option className="category-opt-group" key={`${category.name}_${index}`} label={category.name} />
+                            </>
+                        })}
+                    </select >
+                </div>
+                <div className={styles["search-div"]}>
+                    <input type='text' onChange={(e) => setSearchQuery((e.target as HTMLInputElement).value)} className={styles['search-bar']} />
+                    <Image height={20} style={{ cursor: "pointer" }} onClick={() => handleSearch()} src={searchIcon} alt='search ico' />
+                </div>
+            </div>
+            <div className={styles["profile-links"]}>
+                <Link href={"/account"}>Profile</Link>
+                <Link href={"/orders"}>Orders</Link>
+            </div>
         </nav>
     )
 }

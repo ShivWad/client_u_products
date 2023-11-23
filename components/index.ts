@@ -1,7 +1,9 @@
+import MiniProduct from "./MiniProduct";
 import NavBar from "./NavBar";
 
+MiniProduct
 
-
-export  {
-    NavBar
+export {
+    NavBar,
+    MiniProduct
 }

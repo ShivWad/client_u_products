@@ -1,0 +1,120 @@
+.main-nav {
+    background-color: white;
+    border: 3px solid black;
+    padding: 20px;
+    display: flex;
+    gap: 10%;
+    align-items: center;
+    margin-bottom: 5px;
+    height: 65px;
+}
+
+.logo {}
+
+.logo::after {
+    content: "PreOwnedPalace";
+}
+
+.nav-inner-div {
+    display: flex;
+    flex: 1;
+    gap: 3%;
+    align-items: center;
+}
+
+.nav-inner-div-dropdown {
+    display: flex;
+    gap: 10px;
+}
+
+.search-div {
+    display: flex;
+    align-items: center;
+    gap: 2%;
+    flex: 1;
+}
+
+.root-navbar {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    background: white;
+    border: 2px black solid;
+}
+
+.search-bar {
+    max-width: 600px;
+    height: 30px;
+    border: solid 2px black;
+    padding: 1rem;
+    width: 100%;
+    transition: all linear 100ms;
+}
+
+
+.search-bar:focus {
+    box-shadow: 0 0 7px 2px #888888;
+}
+
+.search-bar:focus-visible {
+    outline: none
+}
+
+.custom-select {
+    border: solid 2px black;
+    padding: 0.4rem;
+    width: 100%;
+    min-width: 90px;
+    transition: all linear 100ms;
+}
+
+.profile-links {
+    display: flex;
+    width: 10%;
+    justify-content: space-between;
+    margin-right: 10px;
+}
+
+.profile-links a {
+    color: black;
+    font-weight: bold;
+}
+
+
+
+
+
+
+/* mini products */
+
+
+.mini-product-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    border: 2px solid black;
+    background-color: rgb(206 215 121);
+    transition: all linear 200ms;
+    cursor: pointer;
+}
+
+.mini-product-main:hover {
+    box-shadow: 0 0 8px 3px #7fc8d1;
+}
+
+.mini-product-image {
+    border: 5px solid rgb(231, 230, 230);
+
+}
+
+.mini-pro-info {
+    padding: 10px;
+}
+
+.mini-pro-info .name {}
+
+.mini-pro-info .price {
+    font-size: larger;
+    font-weight: bold;
+
+}
