@@ -7,7 +7,7 @@ const page = async () => {
     let isAuthenticated = await checkAuth();
     console.log("isAuthenticated>>", isAuthenticated);
     if (isAuthenticated) {
-        redirect("http://localhost:3000/");
+        redirect("/");
     }
     return (
         <div>

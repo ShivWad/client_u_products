@@ -18,10 +18,11 @@ const MiniProduct = ({ product }: { product: TProduct }) => {
     let formattedDate = year + "-" + (month < 10 ? "0" : "") + month + "-" + (day < 10 ? "0" : "") + day;
     return (
         <div onClick={() => window.open(`/product/${product._id}`, '_blank')} className={styles['mini-product-main']}>
-            <Image className={styles['mini-product-image']} width={200} height={200} src={product.images[index]} alt='err' />
+            <Image className={styles['mini-product-image']} width={300} height={300} src={product.images[index]} alt='err' />
             <div className={styles["mini-pro-info"]}>
                 <p className={styles['name']}>{product.name}</p>
                 <p className={styles['price']}>₹{product.price}</p>
+                <p>{product.city}</p>
                 <p>{formattedDate}</p>
             </div>
         </div>
