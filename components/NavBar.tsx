@@ -14,13 +14,18 @@ const NavBar = ({ categoryJson, locationsJson }: { categoryJson: TCategories, lo
     const [showHBM, setShowHBM] = useState(false);
     const router = useRouter();
     const handleSearch = () => {
+        if (searchQuery.length < 1) {
+            router.refresh();
+            return
+        }
+
         let filter = `/products/filter?city=${city}&sortDirection=asc&name=${searchQuery}&category=${category}&sortBy=price`;
         router.push(filter);
     }
     return (
         <>
             <nav className={styles['main-nav']}>
-                {/* <div className={`${styles['nav-ham-bg']} ${styles[showHBM ? 'show-hm' : 'hide-hm']}`}></div> */}
+                <div className={`${styles['nav-ham-bg']} ${styles[showHBM ? 'show-hm' : 'hide-hm']}`}></div>
 
                 <Link className={styles['logo-link']} href={"/"}><FontAwesomeIcon icon={faRecycle} size={"2x"} /></Link>
                 <div className={styles['nav-inner-div']}>

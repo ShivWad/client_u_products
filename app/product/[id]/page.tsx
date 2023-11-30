@@ -1,4 +1,6 @@
+import { Product } from '@/components';
 import { TProduct } from '@/types';
+import Image from 'next/image';
 import React from 'react'
 
 const getProduct = async (id: string): Promise<TProduct> => {
@@ -9,7 +11,7 @@ const getProduct = async (id: string): Promise<TProduct> => {
 const page = async ({ params }: { params: { id: string } }) => {
     let product = await getProduct(params.id);
     return (
-        <div>{product.name}</div>
+        <Product product={product} />
     )
 }
 
