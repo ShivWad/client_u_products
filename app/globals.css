@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(241, 243, 250);
+  background-color: #f2f4f5;
   margin: 0;
   position: relative;
   width: 100%;
@@ -18,4 +18,91 @@ body {
   align-items: center;
   gap: 20px;
   padding: 1rem;
+}
+
+
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  transform: translateY(25%);
+  position: relative;
+  text-align: center;
+}
+
+.card {
+  width: 350px;
+  background-color: rgb(255, 255, 255);
+  overflow: hidden;
+  border: 2px solid;
+  border-radius: 10px;
+  transition: transform 400ms ease-in-out;
+}
+
+.card:hover {
+  transition: transform 400ms ease-in-out;
+  transform: scale(1.2);
+}
+
+.login-container .card {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  gap: 10px;
+}
+
+.login-container input {
+  padding: 15px;
+  border: 1px solid;
+}
+
+.login-container input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.login-container h1+h5+.cus-button {
+  text-align: center;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.forget {
+  float: right;
+}
+
+.check {
+  margin-top: 1px;
+  float: left;
+}
+
+p,
+a {
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.cus-button {
+  background-color: rgb(53, 53, 53);
+  padding: 10px;
+  color: white;
+}
+
+.cus-button:hover {
+  background-color: rgb(0, 0, 0);
+  padding: 10px;
+  color: white;
+}
+
+@media only screen and (max-width: 831px) {
+  .card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .card:hover {
+    transform: none;
+  }
 }

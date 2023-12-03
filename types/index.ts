@@ -23,6 +23,7 @@ type TProduct = {
     isAvailable: boolean,
     createdAt: string,
     updatedAt: string,
+    ownerName: string
 }
 
 type TUser = {
