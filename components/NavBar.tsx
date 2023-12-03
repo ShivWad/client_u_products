@@ -69,10 +69,10 @@ const NavBar = ({ categoryJson, locationsJson }: { categoryJson: TCategories, lo
                     <Link href={"/orders"} className={styles["nav-bar-links"]}> <div><FontAwesomeIcon icon={faCartShopping} size={"2x"} /></div></Link>
                 </div>
 
-                {categoryJson.categories.map((category) => {
+                {categoryJson.categories.map((category,index) => {
                     return (
-                        <div className={`${styles["container"]}`}>
-                            <Link className={styles["nav-bar-links"]} href={`/products/filter?city=${city}&sortDirection=asc&category=${category}&sortBy=price`}>{category.name}</Link>
+                        <div key={index} className={`${styles["container"]}`}>
+                            <Link key={index} className={styles["nav-bar-links"]} href={`/products/filter?city=${city}&sortDirection=asc&category=${category}&sortBy=price`}>{category.name}</Link>
                         </div>
                     )
                 })}
