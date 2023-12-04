@@ -29,7 +29,6 @@ export const checkAuth = async (): Promise<boolean> => {
             }
         }
 
-        console.log("form fun", reqOptions)
 
         let res = await fetch(`${process.env.EX_APP_URL}/api/user/checkauth`, reqOptions);
         let data = await res.json();
@@ -42,4 +41,12 @@ export const checkAuth = async (): Promise<boolean> => {
         return false;
     }
 }
+
+
+export const logout = async () => {
+    let res = await fetch(`${process.env.EX_APP_URL}/api/user/logout`);
+    let responseJson = await res.json();
+    console.log(responseJson);
+    return responseJson;
+};
 

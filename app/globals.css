@@ -38,13 +38,8 @@ body {
   overflow: hidden;
   border: 2px solid;
   border-radius: 10px;
-  transition: transform 400ms ease-in-out;
 }
 
-.card:hover {
-  transition: transform 400ms ease-in-out;
-  transform: scale(1.2);
-}
 
 .login-container .card {
   display: flex;
@@ -54,13 +49,14 @@ body {
 }
 
 .login-container input {
-  padding: 15px;
-  border: 1px solid;
+  border: solid 2px black;
+  padding: 1rem;
+  transition: all linear 100ms;
 }
 
 .login-container input:focus {
   outline: none;
-  border-color: #3498db;
+  box-shadow: 0 0 7px 2px #888888;
 }
 
 .login-container h1+h5+.cus-button {

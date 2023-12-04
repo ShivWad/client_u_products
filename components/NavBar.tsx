@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styles from './components.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRecycle, faUser, faCartShopping, faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faRecycle, faUser, faCartShopping, faSearch, faBars, faSignOut } from '@fortawesome/free-solid-svg-icons';
+import { logout } from '@/utils';
 
 const NavBar = ({ categoryJson, locationsJson }: { categoryJson: TCategories, locationsJson: TLocations }) => {
     const [searchQuery, setSearchQuery] = useState("");
@@ -34,13 +35,9 @@ const NavBar = ({ categoryJson, locationsJson }: { categoryJson: TCategories, lo
                         <select onChange={(e) => setCity(e.target.value)} className={styles["custom-select"]} >
                             {Object.keys(locationsJson).map((state, index) => {
                                 return <>
-                                    <optgroup className={styles["category-opt-group"]} key={`${state}_${index}`} label={state}>
-                                        {locationsJson[state].map((city, i) => {
-                                            return <>
-                                                <option key={`${city}_${i}`} className={styles["category-option"]} value={city}>{city}</option>
-                                            </>
-                                        })}
-                                    </optgroup  >
+                                    <option className={styles["category-opt-group"]} key={`${state}_${index}`} label={state}>
+
+                                    </option  >
                                 </>
                             })}
                         </select >
@@ -59,17 +56,17 @@ const NavBar = ({ categoryJson, locationsJson }: { categoryJson: TCategories, lo
                 </div>
                 <div className={`${styles["profile-links"]}`}>
                     <Link href={"/account"}><FontAwesomeIcon icon={faUser} size={"2x"} /></Link>
-                    <Link href={"/orders"}><FontAwesomeIcon icon={faCartShopping} size={"2x"} /></Link>
+                    <button onClick={async () => await logout()} className={styles["nav-bar-links"]}><FontAwesomeIcon icon={faSignOut} size={"2x"} /></button>
                 </div>
             </nav>
             <div className={`${styles['nav-ham-menu']} ${styles[showHBM ? 'show-hm' : 'hide-hm']}`}>
                 <FontAwesomeIcon className={styles['hm-menu-toggle']} icon={faBars} size='2x' onClick={() => { setShowHBM(!showHBM) }} />
                 <div className={styles["container"]}>
                     <Link href={"/account"} className={styles["nav-bar-links"]}><div><FontAwesomeIcon icon={faUser} size={"2x"} /></div></Link>
-                    <Link href={"/orders"} className={styles["nav-bar-links"]}> <div><FontAwesomeIcon icon={faCartShopping} size={"2x"} /></div></Link>
+                    <button onClick={async () => await logout()} className={styles["nav-bar-links"]}><FontAwesomeIcon icon={faSignOut} size={"2x"} /></button>
                 </div>
 
-                {categoryJson.categories.map((category,index) => {
+                {categoryJson.categories.map((category, index) => {
                     return (
                         <div key={index} className={`${styles["container"]}`}>
                             <Link key={index} className={styles["nav-bar-links"]} href={`/products/filter?city=${city}&sortDirection=asc&category=${category}&sortBy=price`}>{category.name}</Link>

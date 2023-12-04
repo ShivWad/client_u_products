@@ -9,17 +9,13 @@ const page = async () => {
     if (isAuthenticated) {
         redirect("/");
     }
+
+    const handleLogin = () => {
+        console.log(":adsd");
+    }
+
     return (
-        <div className='login-container'>
-            <div className="card">
-                    <h1>Login Page</h1>
-                    <input type="text" placeholder="Username" />
-                    <input type="password" placeholder="Password" />
-                    <button className="cus-button" >Login</button>
-                    <p><input className="check" type="checkbox" />Remember me<a className="forget" href="#">Forgot account?</a></p>
-                    <h5>create account?<a href="/signin"> Create</a></h5>
-            </div>
-        </div>
+        <LoginComp />
     )
 }
 

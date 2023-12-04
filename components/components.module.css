@@ -25,8 +25,9 @@
 }
 
 .hm-menu-toggle {
-    display: none;
+    display: none !important;
 }
+
 
 .nav-ham-menu {
     display: none;
@@ -239,7 +240,7 @@
     }
 
     .hm-menu-toggle {
-        display: block;
+        display: block !important;
     }
 
     .nav-ham-menu {

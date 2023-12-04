@@ -1,11 +1,28 @@
 'use client'
-
 import React, { useState } from 'react'
+
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 const LoginComp = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const searchParams = useSearchParams();
+    const router = useRouter();
+
+    const redirectToPrev = () => {
+        let redirectParam = searchParams.get("prev");
+        if (redirectParam) {
+            router.back();
+            return;
+        }
+        else {
+            router.replace("/");
+            return;
+        }
+    }
 
     const handleLogin = async () => {
+
         let userPayload = JSON.stringify({
             email: email,
             password: password,
@@ -24,33 +41,29 @@ const LoginComp = () => {
 
         let res = await fetch("/api/user/login", requestOptions);
         let responseJson = await res.json();
-        console.log(responseJson);
-    };
 
-    const test = async () => {
-        let res = await fetch("/api/user/all");
+        if (res.ok) {
+            redirectToPrev();
+            return;
+        }
+        else {
 
-
-        let responseJson = await res.json();
-        console.log(responseJson);
-    };
-
-    const logout = async () => {
-        let res = await fetch("/api/user/logout");
-        let responseJson = await res.json();
-        console.log(responseJson);
+        }
     };
 
     return (
-        <div>
-            <h1>Login</h1>
-            <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} />
-            <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-            <button onClick={() => handleLogin()}>Login</button>
-            <button onClick={() => test()}>TEST</button>
-            <button onClick={() => logout()}>LOGOUT</button>
+        <>
+            <div className='login-container'>
+                <div className="card">
+                    <h3>Please enter the required fields</h3>
+                    <input type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+                    <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                    <button className="cus-button" onClick={() => handleLogin()} >Login</button>
+                    <h5>create account?<a href="/signin"> Create</a></h5>
+                </div>
+            </div>
 
-        </div>
+        </>
     )
 }
 

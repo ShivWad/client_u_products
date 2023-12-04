@@ -43,14 +43,13 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
+  let url = new URL(request.url);
   try {
-    let url = new URL(request.url);
     let mainUrl = BASE_URL + url.pathname;
     console.log("calling>>", mainUrl);
     const cookieStore = cookies();
     const token = cookieStore.get("sesAuth");
 
-    console.log("token>>", token);
 
     let reqOptions: RequestInit = {
       method: "GET",
@@ -70,13 +69,13 @@ export async function GET(request: Request) {
       }
     }
 
-    console.log("reqOptions>>", reqOptions)
     const res = await fetch(mainUrl, reqOptions);
-    console.log("Res status>>", res.status);
     let data = await res.json();
     return new Response(JSON.stringify(data), { status: res.status });
   } catch (error) {
     console.log(error);
+    console.log("url>>>", url.pathname);
+
     return new Response(JSON.stringify({ error: error }), { status: 500 });
   }
 }
