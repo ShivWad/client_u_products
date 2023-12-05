@@ -38,7 +38,7 @@ export default async function RootLayout({
   let locationsJson = await getCities();
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body >
         <NavBar categoryJson={categoryJson} locationsJson={locationsJson} />
         {children}
       </body>
