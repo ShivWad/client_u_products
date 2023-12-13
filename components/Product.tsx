@@ -3,7 +3,7 @@
 import { TProduct } from '@/types'
 import Image from 'next/image'
 import React, { useState } from 'react'
-import styles from './components.module.css'
+import './components.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faV } from '@fortawesome/free-solid-svg-icons'
 import { checkAuth } from '@/utils'
@@ -36,31 +36,31 @@ const Product = ({ product }: { product: TProduct }) => {
     const date = new Date(product.updatedAt);
 
     return (
-        <div className={styles['main-product-page']}>
-            <div className={styles['main-image-crou']}>
+        <div className={'main-product-page'}>
+            <div className={'main-image-crou'}>
                 <Image src={product.images[imageIndex]} fill={true} objectFit={"contain"} alt='image' />
-                <div className={styles['image-nav-dot']}>
+                <div className={'image-nav-dot'}>
                     {product.images.map((imgUrl, index) => {
                         return (
-                            <div className={`${styles['img-dot']} ${index === imageIndex ? styles['active'] : ''}`} key={index} onClick={() => setImageIndex(index)}></div>
+                            <div className={`${'img-dot'} ${index === imageIndex ? 'active' : ''}`} key={index} onClick={() => setImageIndex(index)}></div>
                         )
                     })}
                 </div>
-                <FontAwesomeIcon className={`${styles['right-arr']} ${imageIndex === (product.images.length - 1) ? styles['edge-ind'] : ''}`} icon={faV} size='1x' onClick={() => setImageIndex(imageIndex + 1)} />
-                <FontAwesomeIcon className={`${styles['left-arr']} ${imageIndex === 0 ? styles['edge-ind'] : ''}`} icon={faV} size='1x' onClick={() => setImageIndex(imageIndex - 1)} />
+                <FontAwesomeIcon className={`${'right-arr'} ${imageIndex === (product.images.length - 1) ? 'edge-ind' : ''}`} icon={faV} size='1x' onClick={() => setImageIndex(imageIndex + 1)} />
+                <FontAwesomeIcon className={`${'left-arr'} ${imageIndex === 0 ? 'edge-ind' : ''}`} icon={faV} size='1x' onClick={() => setImageIndex(imageIndex - 1)} />
 
             </div >
-            <div className={styles['product-info-right']}>
-                <div className={styles['product-info-card']}>
+            <div className={'product-info-right'}>
+                <div className={'product-info-card'}>
                     <h1>{formatter.format(product.price)}</h1>
                     <p>{product.name}</p>
                     <p>Last updated : {`${date.getDate()}, ${date.toLocaleString('default', { month: 'long' })}`}</p>
                 </div>
-                <div className={styles['product-info-card']}>
+                <div className={'product-info-card'}>
                     <p>{product.description ?? loremIpsum}</p>
                 </div>
 
-                <div className={styles['product-info-card']}>
+                <div className={'product-info-card'}>
                     <h1>{product.ownerName}</h1>
                     <button onClick={() => handleContactSeller()}>Contact Seller</button>
                 </div>

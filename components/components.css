@@ -88,34 +88,64 @@
 .mini-product-main {
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    border: 2px solid black;
-    background-color: rgb(206 215 121);
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
     transition: all linear 200ms;
     cursor: pointer;
+    position: relative;
+    text-align: center;
+    text-wrap: wrap;
+    max-width: 300px;
 }
 
 .mini-product-main:hover {
     box-shadow: 0 0 8px 3px #7fc8d1;
 }
 
+
 .mini-product-image {
-    width: 100%;
-    object-fit: contain;
-    border: 5px solid rgb(231, 230, 230);
+    object-fit: cover;
+    position: relative !important;
+    width: 300px !important;
+    height: 300px !important;
 }
 
 .mini-pro-info {
-    padding: 10px;
+    transition: all linear 200ms;
+    box-shadow: inset 0 0 8px 3px #7fc8d1;
 }
 
-.mini-pro-info .name {}
+.mini-product-main:hover .mini-pro-info {
+    box-shadow: none;
+}
+
+.mini-pro-info .name {
+    color: rgb(78, 0, 0);
+    font-weight: bold;
+    font-size: 30px;
+}
+
+
+.mini-pro-info .description {
+    font-size: 11px;
+    color: rgb(167, 62, 21);
+    display: inline-block;
+    width: 70%;
+}
+
+.price-city-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem;
+}
 
 .mini-pro-info .price {
     font-size: larger;
     font-weight: bold;
-
+    color: rgb(78, 0, 0);
 }
+
 
 .nav-ham-bg.nav-ham-menu.hide-hm {
     display: none;
