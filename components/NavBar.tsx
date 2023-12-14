@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { TCategories, TLocations } from '@/types'
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import './components.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRecycle, faUser, faSearch, faBars, faL } from '@fortawesome/free-solid-svg-icons';
 

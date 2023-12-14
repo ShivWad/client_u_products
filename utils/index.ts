@@ -44,7 +44,30 @@ export const checkAuth = async (): Promise<boolean> => {
 
 
 export const logout = async () => {
-    let res = await fetch(`${process.env.EX_APP_URL}/api/user/logout`);
+
+
+    const cookieStore = cookies();
+    const token = cookieStore.get("sesAuth");
+
+    let reqOptions: RequestInit = {
+        method: "GET",
+        credentials: "include",
+        cache: "no-cache",
+        redirect: "follow",
+    };
+    if (token && token?.value) {
+        reqOptions.headers = {
+            "Cookie": token.value,
+            "Content-Type": 'application/json',
+        }
+    }
+    else {
+        reqOptions.headers = {
+            "Content-Type": 'application/json',
+        }
+    }
+
+    let res = await fetch(`${process.env.EX_APP_URL}/api/user/logout`, reqOptions);
     let responseJson = await res.json();
     console.log(responseJson);
     return responseJson;

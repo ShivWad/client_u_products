@@ -8,7 +8,6 @@
     display: flex;
     gap: 10%;
     align-items: center;
-    margin-bottom: 5px;
     height: 10vh;
 }
 
@@ -112,7 +111,7 @@
 
 .mini-pro-info {
     transition: all linear 200ms;
-    box-shadow: inset 0 0 8px 3px #7fc8d1;
+    background-color: var(--yellow);
 }
 
 .mini-product-main:hover .mini-pro-info {
@@ -155,13 +154,14 @@
 
 
 /* Product Main */
-
 .main-product-page {
     display: grid;
-    grid-template-columns: 50% auto;
+    grid-template-columns: 40% 60%;
     width: 100%;
+    grid-gap: 5%;
     gap: 5%;
     height: 90vh;
+    padding: 0 10% 0 0;
 }
 
 .main-image-crou {
@@ -169,6 +169,8 @@
     width: 100%;
     position: relative;
     height: 100%;
+    padding: 1rem;
+    background-color: var(--yellow);
 }
 
 .product-info-right {
@@ -209,7 +211,7 @@
     top: 50%;
     right: 0;
     transform: rotate(270deg);
-    font-size: xx-large;
+    font-size: xx-large !important;
     cursor: pointer;
     transition: all linear 400ms;
 
@@ -220,7 +222,7 @@
     top: 50%;
     left: 0;
     transform: rotate(90deg);
-    font-size: xx-large;
+    font-size: xx-large !important;
     cursor: pointer;
     transition: all linear 400ms;
 }

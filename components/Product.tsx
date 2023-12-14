@@ -3,7 +3,6 @@
 import { TProduct } from '@/types'
 import Image from 'next/image'
 import React, { useState } from 'react'
-import './components.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faV } from '@fortawesome/free-solid-svg-icons'
 import { checkAuth } from '@/utils'
@@ -57,7 +56,7 @@ const Product = ({ product }: { product: TProduct }) => {
                     <p>Last updated : {`${date.getDate()}, ${date.toLocaleString('default', { month: 'long' })}`}</p>
                 </div>
                 <div className={'product-info-card'}>
-                    <p>{product.description ?? loremIpsum}</p>
+                    <span>{product.description ?? loremIpsum}</span>
                 </div>
 
                 <div className={'product-info-card'}>
