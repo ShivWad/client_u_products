@@ -4,7 +4,7 @@ import { TProduct } from '@/types'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faV } from '@fortawesome/free-solid-svg-icons'
+import { faCircleUser, faMessage, faV } from '@fortawesome/free-solid-svg-icons'
 import { checkAuth } from '@/utils'
 import { useRouter } from 'next/navigation'
 
@@ -59,9 +59,12 @@ const Product = ({ product }: { product: TProduct }) => {
                     <span>{product.description ?? loremIpsum}</span>
                 </div>
 
-                <div className={'product-info-card'}>
-                    <h1>{product.ownerName}</h1>
-                    <button onClick={() => handleContactSeller()}>Contact Seller</button>
+                <div className={'product-info-card owner-contact'}>
+                    <div>
+                        <FontAwesomeIcon icon={faCircleUser} />
+                        <h1>  {product.ownerName}</h1>
+                    </div>
+                    <FontAwesomeIcon className='message-ico' icon={faMessage} onClick={() => handleContactSeller()} />
                 </div>
 
             </div>
