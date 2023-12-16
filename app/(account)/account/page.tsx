@@ -1,5 +1,5 @@
 
-import Logout from '@/components/Logout';
+import Logout from '@/components/tsxs/Logout';
 import { checkAuth, logout } from '@/utils'
 import React from 'react'
 const page = async () => {

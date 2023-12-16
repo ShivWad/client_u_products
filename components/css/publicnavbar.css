@@ -1,0 +1,217 @@
+.main-nav {
+    background-color: white;
+    border: 0px solid black;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    padding: 20px;
+    display: flex;
+    gap: 10%;
+    align-items: center;
+    height: 10vh;
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+
+}
+
+.nav-inner-div {
+    display: flex;
+    flex: 1;
+    gap: 3%;
+    align-items: center;
+}
+
+.nav-inner-div-dropdown {
+    display: flex;
+    gap: 10px;
+}
+
+.hm-menu-toggle {
+    display: none !important;
+}
+
+
+.nav-ham-menu {
+    display: none;
+}
+
+.search-div {
+    display: flex;
+    align-items: center;
+    gap: 2%;
+    flex: 1;
+}
+
+.root-navbar {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    background: white;
+    border: 2px black solid;
+}
+
+.search-bar {
+    max-width: 600px;
+    height: 30px;
+    border: solid 2px black;
+    padding: 1rem;
+    width: 100%;
+    transition: all linear 100ms;
+}
+
+.search-bar:focus {
+    box-shadow: 0 0 7px 2px #888888;
+}
+
+.search-bar:focus-visible {
+    outline: none
+}
+
+.custom-select {
+    border: solid 2px black;
+    padding: 0.4rem;
+    width: 45%;
+    min-width: 90px;
+    transition: all linear 100ms;
+}
+
+.profile-links {
+    display: flex;
+    width: 10%;
+    justify-content: space-evenly;
+    margin-right: 10px;
+}
+
+.profile-links a {
+    color: black;
+}
+
+
+
+
+.nav-ham-bg.nav-ham-menu.hide-hm {
+    display: none;
+}
+
+@media only screen and (max-width: 831px) {
+
+    /* Styles for small devices go here */
+    .hide-hm {
+        display: none;
+    }
+
+    .nav-ham-bg {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        overflow: hidden;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .logo-link {
+        display: none;
+    }
+
+    .hm-menu-toggle {
+        display: block !important;
+    }
+
+    .nav-ham-menu {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        height: 100vh;
+        background-color: rgb(206 215 121);
+        width: 60vw;
+        transition: all 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        border-right: 2px solid black;
+        box-shadow: none;
+        min-width: 200px;
+        overflow: scroll;
+        scroll-behavior: smooth;
+        z-index: 1;
+    }
+
+    .nav-ham-menu.hide-hm {
+        left: -500px;
+        opacity: 0;
+    }
+
+    .nav-ham-menu.show-hm {
+        left: 0;
+        box-shadow: 12px -1px 20px 0px #000000;
+        opacity: 1;
+
+    }
+
+    .nav-inner-div-dropdown {
+        display: none;
+    }
+
+    .nav-ham-menu .hm-menu-toggle {
+        margin: 1rem;
+    }
+
+    .profile-links {
+        display: none;
+    }
+
+    .nav-ham-menu .nav-bar-links {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .nav-ham-menu .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+        margin-bottom: 11px;
+        border-bottom: 1px solid black;
+        padding: 1rem;
+        background-color: rgb(207, 221, 80);
+    }
+
+    .nav-bar-links {
+        color: black;
+        text-decoration: none;
+        text-align: center;
+    }
+
+
+
+
+}
+
+@media only screen and (min-width: 832px) and (max-width: 1200px) {
+
+    /* Styles for medium devices go here */
+    .nav-inner-div-dropdown {
+        flex-direction: column;
+        gap: 2px;
+        width: 15%;
+    }
+
+    .custom-select {
+        font-size: small;
+        padding: 0.1rem;
+    }
+
+
+
+    /* main product */
+
+    /* .main-product-page {
+        grid-template-columns: none;
+        grid-template-rows: 50% 50%;
+    } */
+}
+
+@media only screen and (min-width: 1201px) {
+    /* Styles for extra-large devices go here */
+}

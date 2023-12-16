@@ -1,5 +1,6 @@
 'use server'
 
+import { TLoginInput, TResObj } from "@/types";
 import { cookies } from "next/headers";
 
 /**
@@ -72,4 +73,3 @@ export const logout = async () => {
     console.log(responseJson);
     return responseJson;
 };
-

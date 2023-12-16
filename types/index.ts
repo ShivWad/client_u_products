@@ -27,17 +27,32 @@ type TProduct = {
 }
 
 type TUser = {
-    _id: string,
-    name: string,
+    _id?: string,
+    name?: string,
+    email?: string,
+    createdAt?: string,
+    isAuthenticated?: boolean
+}
+
+
+type TLoginInput = {
+    name?: string | null,
     email: string,
-    password: string,
-    createdAt: string,
-    __v: number
+    password: string
+}
+
+type TResObj = {
+    status: "FAILED" | "SUCCESS",
+    message: string,
+    dbCode?: number,
+    user?: TUser
 }
 
 export type {
     TCategories,
     TLocations,
     TUser,
-    TProduct
+    TProduct,
+    TLoginInput,
+    TResObj
 }

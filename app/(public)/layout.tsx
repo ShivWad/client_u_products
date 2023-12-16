@@ -1,14 +1,16 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '../globals.css'
-import '../../components/components.css'
-import { NavBar } from '@/components'
+import { PublicNavBar } from '@/components'
 import { TCategories, TLocations } from '@/types'
+
 const inter = Inter({ subsets: ['latin'] })
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 // Prevent fontawesome from adding its CSS since we did it manually above:
 import { config } from '@fortawesome/fontawesome-svg-core';
+import { Provider } from 'react-redux'
+import { store } from '@/redux/store'
 config.autoAddCss = false; /* eslint-disable import/first */
 
 export const metadata: Metadata = {
@@ -40,8 +42,10 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body >
-        <NavBar categoryJson={categoryJson} locationsJson={locationsJson} />
-        {children}
+        {/* <Provider store={store}> */}
+          <PublicNavBar categoryJson={categoryJson} locationsJson={locationsJson} />
+          {children}
+        {/* </Provider> */}
       </body>
     </html>
   )
