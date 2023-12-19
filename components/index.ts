@@ -3,7 +3,7 @@ import PublicNavBar from "./tsxs/PublicNavbar";
 import Product from "./tsxs/Product";
 import LoginComp from "./tsxs/LoginComp";
 import SignUp from "./tsxs/SignUp";
-import AccountNavbar from "./tsxs/AccountNavbar";
+import AccountLayout from "./tsxs/AccountLayout";
 
 export {
     PublicNavBar,
@@ -11,5 +11,5 @@ export {
     Product,
     LoginComp,
     SignUp,
-    AccountNavbar
+    AccountLayout
 }

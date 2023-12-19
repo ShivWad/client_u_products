@@ -31,7 +31,7 @@ type TUser = {
     name?: string,
     email?: string,
     createdAt?: string,
-    isAuthenticated?: boolean
+    isAuthenticated: boolean
 }
 
 
@@ -41,7 +41,7 @@ type TLoginInput = {
     password: string
 }
 
-type TResObj = {
+type TAuthObj = {
     status: "FAILED" | "SUCCESS",
     message: string,
     dbCode?: number,
@@ -54,5 +54,5 @@ export type {
     TUser,
     TProduct,
     TLoginInput,
-    TResObj
+    TAuthObj 
 }

@@ -5,14 +5,10 @@ import { checkAuth } from '@/utils';
 import { SignUp } from '@/components';
 
 const page = async () => {
-    let isAuthenticated = await checkAuth();
-    console.log("isAuthenticated>>", isAuthenticated);
-    if (isAuthenticated) {
+    let authObj = await checkAuth();
+    // console.log("isAuthenticated>>", isAuthenticated);
+    if (authObj.user?.isAuthenticated) {
         redirect("/");
-    }
-
-    const handleLogin = () => {
-        console.log(":adsd");
     }
 
     return (

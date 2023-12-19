@@ -5,7 +5,7 @@ export async function POST(request: Request) {
   try {
     let url = new URL(request.url);
     let mainUrl = BASE_URL + url.pathname;
-    console.log("calling>>", mainUrl);
+    // console.log("calling>>", mainUrl);
     let reqBody = await request.json();
 
     const cookieStore = cookies();
@@ -29,10 +29,10 @@ export async function POST(request: Request) {
       }
     }
 
-    console.log("reqOptions", reqOptions)
+    // console.log("reqOptions", reqOptions)
 
     const res = await fetch(mainUrl, reqOptions);
-    console.log("Res status>>", res.status);
+    // console.log("Res status>>", res.status);
     const data = await res.json();
     cookieStore.set({ name: "sesAuth", value: res.headers.getSetCookie()[0], httpOnly: true });
     return new Response(JSON.stringify(data), { status: res.status });
@@ -46,7 +46,7 @@ export async function GET(request: Request) {
   let url = new URL(request.url);
   try {
     let mainUrl = BASE_URL + url.pathname;
-    console.log("calling>>", mainUrl);
+    // console.log("calling>>", mainUrl);
     const cookieStore = cookies();
     const token = cookieStore.get("sesAuth");
 

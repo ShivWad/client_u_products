@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { TLoginInput, TResObj } from '@/types';
+import { TLoginInput, TAuthObj } from '@/types';
 import { valiateInputs } from '@/utils/clientUtils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faL, faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -18,20 +18,6 @@ const SignUp = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
 
-    const redirectToPrev = () => {
-        let redirectParam = searchParams.get("prev");
-        if (redirectParam) {
-            router.back();
-            return;
-        }
-        else {
-            router.replace("/");
-            return;
-        }
-    }
-
-
-
     const handleSignIn = async () => {
         try {
             setProcessing(true);
@@ -41,7 +27,7 @@ const SignUp = () => {
                 password: password
             }
 
-            let resObj: TResObj = valiateInputs({ validateInput: inputs, action: "SignUp" });
+            let resObj: TAuthObj = valiateInputs({ validateInput: inputs, action: "SignUp" });
 
             if (resObj.status === "FAILED") {
                 setErrorText(resObj.message);
@@ -63,16 +49,17 @@ const SignUp = () => {
             };
 
             let res = await fetch("/api/user/signup", requestOptions);
-            let responseJson: TResObj = await res.json();
-            
+            let responseJson: TAuthObj = await res.json();
+
             if (res.ok) {
-                router.push("/login");
+                router.replace("/login");
             }
             else {
                 if (responseJson.dbCode === 11000)
                     setErrorText(responseJson.message);
             }
         } catch (error: any) {
+            setErrorText("Some internal error occured, please try again later!");
             if (error?.message)
                 console.log(">>>>", error?.message);
         }

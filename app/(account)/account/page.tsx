@@ -1,14 +1,14 @@
 
 import Logout from '@/components/tsxs/Logout';
 import { checkAuth, logout } from '@/utils'
+
 import React from 'react'
 const page = async () => {
-
-    let isAuthenticated = await checkAuth();
+    let authObj = await checkAuth();
 
     return (
         <>
-            {isAuthenticated ? "logged in " : "logged out"}
+            {authObj.user?.isAuthenticated ? "logged in " : "logged out"}
             <Logout />
         </>
     )

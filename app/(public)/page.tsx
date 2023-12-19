@@ -2,14 +2,7 @@ export default async function Home() {
 
   return (
     <>
-
-      <main>
-
-      </main>
-
-      <footer>
-
-      </footer>
+      <h1>HOME</h1>
     </>
 
   )

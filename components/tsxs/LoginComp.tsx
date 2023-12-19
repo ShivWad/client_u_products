@@ -3,10 +3,12 @@ import React, { useState } from 'react'
 
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { TLoginInput, TResObj } from '@/types';
+import { TLoginInput, TAuthObj, TUser } from '@/types';
 import { valiateInputs } from '@/utils/clientUtils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+
+
 const LoginComp = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -19,7 +21,7 @@ const LoginComp = () => {
     const redirectToPrev = () => {
         let redirectParam = searchParams.get("prev");
         if (redirectParam) {
-            router.back();
+            router.push(`/${redirectParam}`);
             return;
         }
         else {
@@ -35,7 +37,7 @@ const LoginComp = () => {
                 email: email,
                 password: password
             }
-            let resObj: TResObj = valiateInputs({ validateInput: inputs, action: "SignUp" });
+            let resObj: TAuthObj = valiateInputs({ validateInput: inputs, action: "SignUp" });
 
             if (resObj.status === "FAILED") {
                 setErrorText(resObj.message);
@@ -57,10 +59,17 @@ const LoginComp = () => {
             };
 
             let res = await fetch("/api/user/login", requestOptions);
-            let responseJson: TResObj = await res.json();
-            console.log(responseJson);
+            let responseJson: TAuthObj = await res.json();
+            // console.log(responseJson);
 
             if (res.ok) {
+                // if (responseJson.user) {
+                //     let authUser = responseJson.user;
+                //     if (authUser) {
+                //         // authUser.isAuthenticated = true;
+                //         // dispatch(loginDetails(responseJson.user))
+                //     }
+                // }
                 setErrorText("");
                 redirectToPrev();
             }

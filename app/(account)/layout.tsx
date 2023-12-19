@@ -1,19 +1,24 @@
 import React, { ReactNode } from 'react'
 import '../globals.css'
-import { AccountNavbar } from '@/components'
-import { Provider } from 'react-redux'
-import { store } from '@/redux/store'
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
+import { AccountLayout } from '@/components'
+import { checkAuth } from '@/utils'
+import { redirect } from 'next/navigation'
+
+
+export default async function RootLayout({
+    children,
+}: {
+    children: React.ReactNode
+}) {
+
+    let authObj = await checkAuth();
+    if (!authObj.user?.isAuthenticated) redirect(`/login?prev=account&isAuthenticated=false`);
+
     return (
         <html lang="en">
-            <body >
-                {/* <Provider store={store}> */}
-                    <AccountNavbar />
-                    {children}
-                {/* </Provider> */}
+            <body style={{ background: "#1e1f20", position: "absolute" }} >
+                <AccountLayout children={children} />
             </body>
         </html>
     )
 }
-
-export default RootLayout

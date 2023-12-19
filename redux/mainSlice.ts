@@ -14,6 +14,9 @@ const mainSlice = createSlice({
     } as TUser, // Explicitly specify initial state type
     reducers: {
         loginDetails: (state: TUser, action: PayloadAction<TUser>) => {
+
+            console.log(">>>>", action);
+
             state._id = action.payload._id;
             state.createdAt = action.payload.createdAt;
             state.email = action.payload.email;

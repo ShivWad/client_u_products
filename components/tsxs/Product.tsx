@@ -15,9 +15,6 @@ const Product = ({ product }: { product: TProduct }) => {
     const router = useRouter();
     const handleContactSeller = async () => {
         let isUserAuthenticated = await checkAuth();
-
-        console.log("isUserAuthenticated", isUserAuthenticated);
-
         if (!isUserAuthenticated) {
             router.push(`/login?prev=product/${product._id}`);
             return;

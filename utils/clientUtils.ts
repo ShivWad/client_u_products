@@ -1,13 +1,13 @@
-import { TLoginInput, TResObj } from "@/types";
+import { TLoginInput, TAuthObj } from "@/types";
 
 /**
  * 
  * @param  validateInput, action 
  * @returns 
  */
-export const valiateInputs = ({ validateInput, action }: { validateInput: TLoginInput, action: "Login" | "SignUp" }): TResObj => {
+export const valiateInputs = ({ validateInput, action }: { validateInput: TLoginInput, action: "Login" | "SignUp" }): TAuthObj => {
     let { name, email, password } = validateInput;
-    let resObj: TResObj = {
+    let resObj: TAuthObj = {
         status: "SUCCESS",
         message: "Validated succesfully",
 
@@ -19,7 +19,7 @@ export const valiateInputs = ({ validateInput, action }: { validateInput: TLogin
             message: "Invalid name received",
         };
         console.log(resObj);
-       return resObj;
+        return resObj;
     }
 
 

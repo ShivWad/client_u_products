@@ -1,6 +1,54 @@
-.account-nav {
-    height: 10vh;
-    background: white;
+.account-parent {
+    display: grid;
+    grid-template-columns: 200px auto;
+    flex: 1;
+    color: aliceblue;
+    gap: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+}
+
+/* left */
+.account-left {
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+}
+
+
+
+.acc-nav-button {
+    border: 3px #19d4ca solid;
+    color: aliceblue;
+    width: 100%;
+    padding: 1rem;
+    background: #0f0f1a;
+    border-radius: 0.5rem;
+    transition: all linear 400ms;
+    font-size: medium;
+    text-decoration: none;
+    text-align: center;
+}
+
+.acc-nav-button.selected {
+    border: 3px #19d4ca solid;
+    background: #386981a3;
+
+}
+
+.acc-nav-button:hover {
+    background: #386981a3;
+}
+
+/* right */
+.account-right {
+    background-color: aliceblue;
+    border-radius: 0.5rem;
+    color: black
 }
 
 
