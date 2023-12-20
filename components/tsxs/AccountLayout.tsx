@@ -16,7 +16,7 @@ const AccountLayout = ({
     //     router.push("/login?prev=account")
     // }
     return (
-        <div className='account-parent'>
+        <div className='account-container'>
             <div className='account-left'><AccountLeft /></div>
             <div className='account-right'>
                 {children}

@@ -89,9 +89,9 @@ const LoginComp = () => {
                 {errorText && <h3>{errorText}</h3>}
                 <div className={`card ${errorText?.length ? "error" : ""}`}>
                     <h3>Please enter the required fields</h3>
-                    <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-                    <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-                    <button className={`cus-button ${processing ? 'processing' : ""}`} onClick={async () => {
+                    <input className='global-text-input' type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+                    <input className='global-text-input' type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                    <button className={`global-button ${processing ? 'processing' : ""}`} onClick={async () => {
                         await handleLogin();
                         setProcessing(false);
                     }} > {processing ? <FontAwesomeIcon className='spinner' icon={faSpinner} /> : "Log In!"}</button>

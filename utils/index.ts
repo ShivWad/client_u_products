@@ -91,3 +91,6 @@ export const logout = async () => {
     }
     return false;
 };
+
+
+export const Sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));

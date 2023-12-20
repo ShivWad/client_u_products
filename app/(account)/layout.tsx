@@ -17,7 +17,9 @@ export default async function RootLayout({
     return (
         <html lang="en">
             <body style={{ background: "#1e1f20", position: "absolute" }} >
-                <AccountLayout children={children} />
+                <AccountLayout>
+                    {children}
+                </AccountLayout>
             </body>
         </html>
     )

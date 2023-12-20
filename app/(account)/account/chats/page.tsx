@@ -1,9 +1,8 @@
+import { Sleep } from '@/utils';
 import React from 'react'
 
-const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
 const page = async () => {
-    let a = await sleep(1000);
+    let a = await Sleep(100000);
     return (
         <div>Chats</div>
     )

@@ -7,6 +7,7 @@ import { TLoginInput, TAuthObj } from '@/types';
 import { valiateInputs } from '@/utils/clientUtils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faL, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import LoaderButton from './LoaderButton';
 
 
 const SignUp = () => {
@@ -31,7 +32,7 @@ const SignUp = () => {
 
             if (resObj.status === "FAILED") {
                 setErrorText(resObj.message);
-                return 0;
+                return;
             }
             else
                 setErrorText("");
@@ -72,15 +73,10 @@ const SignUp = () => {
                 {errorText && <h3>{errorText}</h3>}
                 <div className={`card ${errorText?.length ? "error" : ""}`}>
                     <h3>Please enter the required fields</h3>
-                    <input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)} />
-                    <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-                    <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-                    <button className={`cus-button ${processing ? 'processing' : ""}`} onClick={async () => {
-                        await handleSignIn();
-                        setProcessing(false);
-                    }} >
-                        {processing ? <FontAwesomeIcon className='spinner' icon={faSpinner} /> : "Sign Up!"}
-                    </button>
+                    <input className='global-text-input' type="text" placeholder="Name" onChange={(e) => setName(e.target.value)} />
+                    <input className='global-text-input' type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+                    <input className='global-text-input' type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                    <LoaderButton handleClick={handleSignIn} displayText='Sign Up!'/>
                     <h5>Have an account?<a href="/login"> Login</a></h5>
                 </div>
             </div>

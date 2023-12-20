@@ -30,54 +30,23 @@
   gap: 10px;
 }
 
-.login-container input {
+.global-text-input {
   border: solid 2px black;
   padding: 1rem;
   transition: all linear 100ms;
 }
 
-.login-container input:focus {
+.global-text-input:focus {
   outline: none;
   box-shadow: 0 0 7px 2px #888888;
 }
 
-.login-container h1+h5+.cus-button {
+.login-container h1+h5 {
   text-align: center;
   text-decoration: none;
   font-weight: 700;
 }
 
-.cus-button {
-  background-color: rgb(53, 53, 53);
-  padding: 10px;
-  color: white;
-  font-size: x-large;
-}
-
-.cus-button.processing {
-  cursor: wait;
-  pointer-events: none;
-}
-
-.cus-button:hover {
-  background-color: rgb(0, 0, 0);
-  padding: 10px;
-  color: white;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.spinner {
-  animation: spin 1s linear infinite;
-}
 
 @media only screen and (max-width: 831px) {
   .card {

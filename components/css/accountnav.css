@@ -1,14 +1,18 @@
-.account-parent {
+.account-container {
     display: grid;
     grid-template-columns: 200px auto;
-    flex: 1;
     color: aliceblue;
+    grid-gap: 5px;
     gap: 5px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
+    width: 90%;
+    max-width: 1300px;
+    min-width: 970px;
+    min-height: 700px;
+
 }
 
 /* left */
@@ -16,10 +20,9 @@
     background: transparent;
     display: flex;
     flex-direction: column;
-    gap: 5px
+    gap: 5px;
+    justify-content: center;
 }
-
-
 
 .acc-nav-button {
     border: 3px #19d4ca solid;
@@ -44,17 +47,83 @@
     background: #386981a3;
 }
 
+/* left */
+
 /* right */
 .account-right {
     background-color: aliceblue;
     border-radius: 0.5rem;
-    color: black
+    color: black;
 }
 
+/* right */
+
+
+
+/* account-info-parent */
+
+.account-info-parent {
+    display: grid;
+    grid-template-rows: 60px auto;
+    text-align: center;
+}
+
+.account-info-header {
+    padding: 1rem;
+    color: aliceblue;
+    background-color: #0f0f1a;
+    height: 50px;
+    font-size: x-large;
+}
+
+.acc-logout-button {
+    float: right;
+    cursor: pointer;
+    transition: all linear 400ms;
+}
+
+.acc-logout-button:hover {
+    scale: 135%;
+}
+
+.action {
+    margin: 1rem;
+}
+
+.account-info-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    justify-self: center;
+    align-self: center;
+    height: 100%;
+}
+
+.account-info-input {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.account-info-input span {
+    font-size: x-large;
+    margin: 1rem;
+}
+
+.account-info-input .global-text-input {
+    width: 100%;
+}
+
+/* account-info-parent */
 
 @media only screen and (max-width: 831px) {}
 
-@media only screen and (min-width: 832px) and (max-width: 1200px) {}
+@media only screen and (min-width: 832px) and (max-width: 1200px) {
+    /* .account-container {
+        grid-template-rows: auto auto;
+    } */
+}
 
 @media only screen and (min-width: 1201px) {
     /* Styles for extra-large devices go here */
