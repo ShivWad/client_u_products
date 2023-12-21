@@ -1,12 +1,12 @@
 'use client'
 import React, { useState } from 'react'
-import { TCategories, TLocations } from '@/types'
+import { TCategories, TLocations, TUser } from '@/types'
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRecycle, faUser, faSearch, faBars, faL } from '@fortawesome/free-solid-svg-icons';
 
-const NavBar = ({ categoryJson, locationsJson }: { categoryJson: TCategories, locationsJson: TLocations }) => {
+const NavBar = ({ categoryJson, locationsJson, user }: { categoryJson: TCategories, locationsJson: TLocations, user?: TUser }) => {
     const [searchQuery, setSearchQuery] = useState("");
     const [city, setCity] = useState("");
     const [category, setCategory] = useState("");
@@ -21,6 +21,8 @@ const NavBar = ({ categoryJson, locationsJson }: { categoryJson: TCategories, lo
         if (category.length > 0) filter += `&category=${category}`;
         router.push(filter);
     }
+
+    let accHref = user ? `/account/${user._id}` : "/account";
 
     return (
         <>
@@ -55,13 +57,13 @@ const NavBar = ({ categoryJson, locationsJson }: { categoryJson: TCategories, lo
                     </div>
                 </div>
                 <div className={`${"profile-links"}`}>
-                    <Link href={"/account"}><FontAwesomeIcon icon={faUser} size={"2x"} /></Link>
+                    <Link href={accHref}><FontAwesomeIcon icon={faUser} size={"2x"} /></Link>
                 </div>
             </nav >
             <div className={`${'nav-ham-menu'} ${showHBM ? 'show-hm' : 'hide-hm'}`}>
                 <FontAwesomeIcon className={'hm-menu-toggle'} icon={faBars} size='2x' onClick={() => { setShowHBM(!showHBM) }} />
                 <div className={"container"}>
-                    <Link href={"/account"} className={"nav-bar-links"}><div><FontAwesomeIcon icon={faUser} size={"2x"} /></div></Link>
+                    <Link href={accHref} className={"nav-bar-links"}><div><FontAwesomeIcon icon={faUser} size={"2x"} /></div></Link>
                 </div>
 
                 {categoryJson.categories.map((category, index) => {

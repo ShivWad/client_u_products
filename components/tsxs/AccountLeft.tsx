@@ -1,20 +1,23 @@
 'use client'
 import React from 'react'
-import { usePathname } from 'next/navigation'
+import { useParams, usePathname } from 'next/navigation'
+import { TUser } from '@/types';
 const AccountLeft = () => {
     const pathname = usePathname();
+    const { id } = useParams();
+
 
     const linksArray = [
         {
-            href: "/account",
+            href: `/account/${id}`,
             label: "Account"
         },
         {
-            href: "/account/chats",
+            href: `/account/${id}/chats`,
             label: "My Chats"
         },
         {
-            href: "/account/products",
+            href: `/account/${id}/products`,
             label: "My Products"
         }
     ];

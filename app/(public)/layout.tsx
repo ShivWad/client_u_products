@@ -7,6 +7,7 @@ import { TCategories, TLocations } from '@/types'
 import '@fortawesome/fontawesome-svg-core/styles.css';
 // Prevent fontawesome from adding its CSS since we did it manually above:
 import { config } from '@fortawesome/fontawesome-svg-core';
+import { checkAuth } from '@/utils';
 
 config.autoAddCss = false; /* eslint-disable import/first */
 
@@ -33,14 +34,14 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-
+  let authObj = await checkAuth();
   let categoryJson = await getCategories();
   let locationsJson = await getCities();
   return (
     <html lang="en">
       <body >
         {/* <Provider store={store}> */}
-        <PublicNavBar categoryJson={categoryJson} locationsJson={locationsJson} />
+        <PublicNavBar user={authObj.user} categoryJson={categoryJson} locationsJson={locationsJson} />
         {children}
         {/* </Provider> */}
       </body>

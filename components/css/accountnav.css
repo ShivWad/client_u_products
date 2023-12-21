@@ -11,7 +11,7 @@
     width: 90%;
     max-width: 1300px;
     min-width: 970px;
-    min-height: 700px;
+    min-height: 800px;
 
 }
 
@@ -116,6 +116,20 @@
 }
 
 /* account-info-parent */
+
+/* user-products */
+.user-products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 1rem;
+    max-height: 800px;
+    overflow: auto;
+    padding: 1rem;
+}
+
+/* user-products */
+
 
 @media only screen and (max-width: 831px) {}
 

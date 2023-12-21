@@ -7,8 +7,6 @@ import React from 'react'
 const page = async () => {
     let authObj = await checkAuth();
     let user = authObj.user;
-    console.log(user);
-
     const handleClick = async () => {
         "use server";
         await Sleep(10000)
@@ -22,16 +20,12 @@ const page = async () => {
             </div>
             <div className='account-info-main'>
                 <div className='account-info-input'>
-                    <span>Change your name</span>
-                    <input className='global-text-input' type='text' placeholder={user?.name} />
-                </div>
-                <div className='account-info-input'>
                     <span>Change email</span>
-                    <input className='global-text-input' type='text' placeholder={user?.email} />
+                    <input autoComplete="off" className='global-text-input' type='text' placeholder={user?.email} />
                 </div>
                 <div className='account-info-input'>
                     <span>Change password</span>
-                    <input className='global-text-input' type="password" />
+                    <input autoComplete="new-password" aria-autocomplete="inline" className='global-text-input' type="password" />
                 </div>
                 <LoaderButton handleClick={handleClick} displayText='Update Info' classNames='action' />
             </div>

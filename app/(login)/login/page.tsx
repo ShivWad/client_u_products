@@ -16,8 +16,11 @@ const page = async ({ searchParams }: { searchParams: any }) => {
     else {
         let authObj = await checkAuth();
         if (authObj.user?.isAuthenticated) {
-            if (searchParams.prev)
-                redirect(`${searchParams.prev}`);
+            if (searchParams.prev) {
+                if (searchParams.prev.includes("acc"))
+                    redirect(`${searchParams.prev}/${authObj.user._id}`);
+                else redirect(`${searchParams.prev}`);
+            }
             else
                 redirect("/");
         }

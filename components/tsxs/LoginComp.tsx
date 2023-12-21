@@ -18,10 +18,14 @@ const LoginComp = () => {
     const router = useRouter();
 
 
-    const redirectToPrev = () => {
+    const redirectToPrev = (user?: TUser) => {
         let redirectParam = searchParams.get("prev");
         if (redirectParam) {
-            router.push(`/${redirectParam}`);
+            if (redirectParam.includes("acc") && user) {
+                console.log(`/${redirectParam}/${user._id}`);
+                router.push(`/${redirectParam}/${user._id}`);
+            }
+            else router.push(`/${redirectParam}`);
             return;
         }
         else {
@@ -60,9 +64,9 @@ const LoginComp = () => {
 
             let res = await fetch("/api/user/login", requestOptions);
             let responseJson: TAuthObj = await res.json();
-            // console.log(responseJson);
-
+            console.log(res);
             if (res.ok) {
+                console.log(responseJson);
                 // if (responseJson.user) {
                 //     let authUser = responseJson.user;
                 //     if (authUser) {
@@ -71,9 +75,10 @@ const LoginComp = () => {
                 //     }
                 // }
                 setErrorText("");
-                redirectToPrev();
+                redirectToPrev(responseJson.user);
             }
             else {
+                console.log(responseJson);
                 setErrorText(responseJson.message);
             }
 

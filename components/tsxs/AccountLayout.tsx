@@ -2,19 +2,19 @@ import { TUser } from '@/types';
 // import { useRouter } from 'next/navigation';
 import React, { Suspense } from 'react'
 import AccountLeft from './AccountLeft';
-
+import { redirect } from 'next/navigation';
 
 const AccountLayout = ({
     children,
+    user
 }: {
-    children: React.ReactNode
+    children: React.ReactNode,
+    user: TUser
 }) => {
 
-    // const router = useRouter();
-
-    // if (!user?.isAuthenticated) {
-    //     router.push("/login?prev=account")
-    // }
+    if (!user?.isAuthenticated) {
+        redirect("/login?prev=account");
+    }
     return (
         <div className='account-container'>
             <div className='account-left'><AccountLeft /></div>
