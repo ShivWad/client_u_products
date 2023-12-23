@@ -14,11 +14,6 @@ export default async function RootLayout({
     let authObj = await checkAuth();
     if (!authObj.user?.isAuthenticated) redirect(`/login?prev=account&isAuthenticated=false`);
 
-    // if (params.id != authObj.user._id) {
-    //     let res = await logout();
-    //     if (res) redirect(`/login?prev=account&isAuthenticated=false`);
-    // }
-
     return (
         <html lang="en">
             <body style={{ background: "#1e1f20", position: "absolute" }} >

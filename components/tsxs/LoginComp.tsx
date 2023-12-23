@@ -18,14 +18,10 @@ const LoginComp = () => {
     const router = useRouter();
 
 
-    const redirectToPrev = (user?: TUser) => {
+    const redirectToPrev = () => {
         let redirectParam = searchParams.get("prev");
         if (redirectParam) {
-            if (redirectParam.includes("acc") && user) {
-                console.log(`/${redirectParam}/${user._id}`);
-                router.push(`/${redirectParam}/${user._id}`);
-            }
-            else router.push(`/${redirectParam}`);
+            router.replace(`/${redirectParam}`);
             return;
         }
         else {
@@ -75,7 +71,7 @@ const LoginComp = () => {
                 //     }
                 // }
                 setErrorText("");
-                redirectToPrev(responseJson.user);
+                redirectToPrev();
             }
             else {
                 console.log(responseJson);

@@ -34,14 +34,13 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  let authObj = await checkAuth();
   let categoryJson = await getCategories();
   let locationsJson = await getCities();
   return (
     <html lang="en">
       <body >
         {/* <Provider store={store}> */}
-        <PublicNavBar user={authObj.user} categoryJson={categoryJson} locationsJson={locationsJson} />
+        <PublicNavBar categoryJson={categoryJson} locationsJson={locationsJson} />
         {children}
         {/* </Provider> */}
       </body>

@@ -4,20 +4,18 @@ import { useParams, usePathname } from 'next/navigation'
 import { TUser } from '@/types';
 const AccountLeft = () => {
     const pathname = usePathname();
-    const { id } = useParams();
-
 
     const linksArray = [
         {
-            href: `/account/${id}`,
+            href: `/account`,
             label: "Account"
         },
         {
-            href: `/account/${id}/chats`,
+            href: `/account/chats`,
             label: "My Chats"
         },
         {
-            href: `/account/${id}/products`,
+            href: `/account/products`,
             label: "My Products"
         }
     ];

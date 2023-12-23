@@ -1,15 +1,20 @@
 
 import { LoaderButton } from '@/components';
 import Logout from '@/components/tsxs/Logout';
-import { checkAuth, logout, Sleep } from '@/utils'
+import { checkAuth, Sleep } from '@/utils'
+import { redirect } from 'next/navigation';
 
 import React from 'react'
 const page = async () => {
     let authObj = await checkAuth();
     let user = authObj.user;
+
+
+    if (!user?.isAuthenticated) redirect("/login?prev=account");
+
     const handleClick = async () => {
         "use server";
-        await Sleep(10000)
+        await Sleep(1000)
     }
 
     return (

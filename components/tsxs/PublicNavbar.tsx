@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRecycle, faUser, faSearch, faBars, faL } from '@fortawesome/free-solid-svg-icons';
 
-const NavBar = ({ categoryJson, locationsJson, user }: { categoryJson: TCategories, locationsJson: TLocations, user?: TUser }) => {
+const NavBar = ({ categoryJson, locationsJson }: { categoryJson: TCategories, locationsJson: TLocations }) => {
     const [searchQuery, setSearchQuery] = useState("");
     const [city, setCity] = useState("");
     const [category, setCategory] = useState("");
@@ -22,7 +22,7 @@ const NavBar = ({ categoryJson, locationsJson, user }: { categoryJson: TCategori
         router.push(filter);
     }
 
-    let accHref = user ? `/account/${user._id}` : "/account";
+    let accHref = "/account";
 
     return (
         <>
