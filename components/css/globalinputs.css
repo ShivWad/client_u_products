@@ -1,35 +1,47 @@
+.global-text-input {
+  border: solid 2px black;
+  padding: 1rem;
+  transition: all linear 100ms;
+}
+
+.global-text-input:focus {
+  outline: none;
+  box-shadow: 0 0 7px 2px #888888;
+}
+
 
 .global-button {
-    background-color: rgb(53, 53, 53);
-    padding: 10px;
-    color: white;
-    font-size: x-large;
-    text-align: center;
-    text-decoration: none;
-    font-weight: 700;
+  background-color: rgb(53, 53, 53);
+  padding: 10px;
+  color: white;
+  font-size: x-large;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 700;
+  min-width: 100px
+}
+
+.global-button.processing {
+  cursor: wait;
+  pointer-events: none;
+}
+
+.global-button:hover {
+  background-color: rgb(0, 0, 0);
+  padding: 10px;
+  color: white;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
   }
-  
-  .global-button.processing {
-    cursor: wait;
-    pointer-events: none;
+
+  to {
+    transform: rotate(360deg);
   }
-  
-  .global-button:hover {
-    background-color: rgb(0, 0, 0);
-    padding: 10px;
-    color: white;
-  }
-  
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-  
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
-  .spinner {
-    animation: spin 1s linear infinite;
-  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}

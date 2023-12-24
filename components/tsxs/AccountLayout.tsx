@@ -1,8 +1,8 @@
 import { TUser } from '@/types';
 // import { useRouter } from 'next/navigation';
 import React, { Suspense } from 'react'
-import AccountLeft from './AccountLeft';
 import { redirect } from 'next/navigation';
+import { AccountLeft } from '..';
 
 const AccountLayout = ({
     children,

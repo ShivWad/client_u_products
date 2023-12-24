@@ -1,8 +1,16 @@
+
+import { NewProduct } from '@/components';
+import { checkAuth } from '@/utils'
+import { redirect } from 'next/navigation';
 import React from 'react'
 
-const page = () => {
+const page = async () => {
+  let authObj = await checkAuth();
+  if (!authObj.user?.isAuthenticated) redirect("/login?prev=/account/product/new");
   return (
-    <div>page</div>
+    <>
+      <NewProduct authObj={authObj} />
+    </>
   )
 }
 

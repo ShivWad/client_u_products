@@ -9,9 +9,13 @@ import { MiniProduct } from '.'
 
 const AccProducts = ({ products }: { products: TProduct[] }) => {
     const router = useRouter();
+
+
+    console.log(products.length);
+
     return (
         <div className={`user-products ${products.length < 1 ? "no-products" : ""}`}>
-            {products.length < 0 ?
+            {products.length > 0 ?
                 products.map((product) => {
                     return (
                         <>
@@ -19,7 +23,7 @@ const AccProducts = ({ products }: { products: TProduct[] }) => {
                         </>)
                 })
                 :
-                <>  <FontAwesomeIcon  className='cat' icon={faCat} />
+                <>  <FontAwesomeIcon className='cat' icon={faCat} />
                     <button onClick={() => router.push("/account/products/new")} style={{ display: "flex", alignItems: "center", gap: "20px", cursor: "pointer" }} className='global-button'>Add your first product! <FontAwesomeIcon icon={faPlus} /></button></>
             }
         </div>
