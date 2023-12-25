@@ -1,6 +1,6 @@
 'use server'
 
-import { TAuthObj } from "@/types";
+import { TAuthObj, TProduct, TResponseObject } from "@/types";
 import { cookies } from "next/headers";
 
 /**
@@ -94,3 +94,64 @@ export const logout = async () => {
 
 
 export const Sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
+
+
+
+
+
+export const ListProduct = async (formdata: FormData): Promise<TResponseObject> => {
+    let responseObj: TResponseObject = {
+        status: "FAILED",
+        message: ""
+    }
+    try {
+        const cookieStore = cookies();
+        const token = cookieStore.get("sesAuth");
+
+        console.log("Server>>", formdata);
+
+        let reqOptions: RequestInit = {
+            method: "POST",
+            credentials: "include",
+            cache: "no-cache",
+            redirect: "follow",
+            body: formdata
+
+        };
+        if (token && token?.value) {
+            reqOptions.headers = {
+                "Cookie": token.value,
+                // "Content-Type": "form-data"
+            }
+        }
+        else {
+            // reqOptions.headers = {
+            //     "Content-Type": "form-data",
+            // }
+        }
+
+        let res = await fetch(`${process.env.EX_APP_URL}/api/product/create`, reqOptions);
+
+        console.log(">>>", res.status);
+        let response: TProduct = await res.json();
+
+        if (res.status === 200) {
+            console.log('inside if')
+            responseObj.status = "SUCCESS"
+            responseObj.res = response;
+            return responseObj
+        }
+        else {
+            console.log('inside else')
+
+            responseObj.res = response
+        }
+    } catch (error: any) {
+        console.log(error);
+        responseObj.message = error.message;
+        return responseObj
+    }
+    console.log('inside end')
+    return responseObj
+}
+

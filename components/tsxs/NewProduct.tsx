@@ -1,15 +1,11 @@
 'use client'
-import { TAuthObj } from '@/types'
-import { faArrowLeft, faArrowRight, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { TAuthObj, TListProduct } from '@/types'
+import { faArrowLeft, faArrowRight, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { File } from 'buffer';
-import React, { createRef, use, useEffect, useRef, useState, } from 'react'
+import React, { useRef, useState } from 'react'
 import { LoaderButton } from '..';
-import { Sleep } from '@/utils';
-
-
-
-
+import { ListProduct } from '@/utils';
+import { useRouter } from 'next/navigation';
 
 const NewProduct = ({ authObj }: { authObj: TAuthObj }) => {
     const [step, setStep] = useState(1);
@@ -18,14 +14,11 @@ const NewProduct = ({ authObj }: { authObj: TAuthObj }) => {
     const [price, setPrice] = useState(0);
     const [city, setCity] = useState("");
     const [category, setCategory] = useState("");
-    const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+    const [selectedFiles, setSelectedFiles] = useState(new Array(5).fill(0));
     const refArr = useRef(new Array(5).fill(null))
-    const [imageUrlArr, setImageUrlArr] = useState(new Array(5).fill(""));
-    const handleListProduct = async () => {
-
-    }
-
-
+    const [err, setError] = useState("");
+    // const [imageUrlArr, setImageUrlArr] = useState(new Array(5).fill(""));
+    const router = useRouter();
     const NavigationButtons = () => {
         return (
             <div className='nav-button'>
@@ -45,7 +38,6 @@ const NewProduct = ({ authObj }: { authObj: TAuthObj }) => {
     }
 
     const handleIconClick = (index: number) => {
-        console.log(refArr);
         refArr.current[index]?.click();
     };
 
@@ -53,68 +45,24 @@ const NewProduct = ({ authObj }: { authObj: TAuthObj }) => {
         if (event.target.files) {
             const file = event.target.files[0];
             //@ts-ignore
-            setSelectedFiles((prevFiles) => [...prevFiles, file]);
-            let st = await selectedFiles[index].arrayBuffer();
-            const blob = new Blob([st], { type: 'image' });
-            let url = URL.createObjectURL(blob);
+            let tempArr = selectedFiles;
+            //@ts-ignore
+            tempArr[index] = file;
 
-            const updatedArray = [...imageUrlArr];
-            updatedArray[index] = url;
-            setImageUrlArr(updatedArray);
+            setSelectedFiles((prev) => [...tempArr]);
+
         }
     };
-
-
-    // const getFileUrl = (file: File) => {
-    //     let fileReader: FileReader;
-    //     fileReader = new FileReader();
-    //     if (file) {
-    //         fileReader = new FileReader();
-    //         fileReader.onload = (e) => {
-    //             const { result } = e.target;
-    //             if (result && !isCancel) {
-    //                 setFileDataURL(result)
-    //             }
-    //         }
-    //         fileReader.readAsDataURL(file);
-    //     }
-    // }
-
-
-    const getUrl = async (index: number) => {
-        console.log(
-            ">>>", selectedFiles[index]
-
-        )
-        // let st = await selectedFiles[index];
-        // const blob = new Blob([st], { type: 'image' });
-        // let url = URL.createObjectURL(blob);
-
-        // const updatedArray = [...imageUrlArr];
-        // updatedArray[index] = url;
-        // setImageUrlArr(updatedArray);
-        return ""
-    }
-
     const InputImage = () => {
         return (
             <>
                 Choose upto five images for your product, you can also upload images later.
                 <div className='image-input'>
-                    {/* <FontAwesomeIcon icon={faPlus} onClick={() => handleIconClick(0)} />
-                    <input
-                        type="file"
-                        ref={fileInputRefs1}
-                        onChange={(e) => handleFileChange(e)}
-                        hidden
-                    /> */}
                     {Array(5).fill(0).map((e, index) => {
                         return (
-                            <div key={`inedx_${index}`}>
-                                {selectedFiles[index] ?
+                            <div key={`index_${index}`}>
+                                {selectedFiles[index] ? <FontAwesomeIcon className='check' icon={faCheck} /> :
                                     <>
-                                        <img src={imageUrlArr[index]} />
-                                    </> : <>
                                         <FontAwesomeIcon icon={faPlus} onClick={() => handleIconClick(index)} />
                                         <input
                                             accept="image/*"
@@ -131,10 +79,51 @@ const NewProduct = ({ authObj }: { authObj: TAuthObj }) => {
             </>
         )
     }
+    const handleProductList = async () => {
+        let productDetails: TListProduct = {
+            name: name,
+            description: description,
+            price: price.toString(),
+            category: category,
+            city: city,
+            ownderId: authObj.user?._id || "",
+            ownerName: authObj.user?.email || "",
+        };
+        // let tempFileArr = new Array(...selectedFiles);
+        let formdata = new FormData();
+        formdata.append("name", productDetails.name);
+        formdata.append("ownerId", productDetails.ownderId);
+        formdata.append("ownerName", productDetails.ownerName);
+        formdata.append("category", productDetails.category);
+        formdata.append("subCategory", "Others");
+        formdata.append("city", productDetails.city);
+        formdata.append("price", productDetails.price);
+        formdata.append("description", productDetails.description);
+        if (selectedFiles.length != 0) {
+            let counter = 1; //need a different counter as imageFileArr can contain null values in between
+            for (let i = 0; i < selectedFiles.length; i++) {
+                if (selectedFiles[i] != 0) {
+                    formdata.append(`image_${counter}`, selectedFiles[i]);
+                    counter++;
+                }
+            }
+        }
 
+        let response = await ListProduct(formdata);
+        console.log("response", response);
+        if (response.status === "SUCCESS" && response.res?._id) {
+    
+            setError("");
+            router.push(`/product/${response.res._id}`)
+        }
+        else {
+            setError("Error occured: " + response.message);
+        }
+    }
     return (
         <div className='new-product'>
             <h1>Step {step}</h1>
+            {err != "" && <h1>{err}</h1>}
             <div className='new-produt-inputs'>
                 {
                     step === 1 ?
@@ -155,7 +144,7 @@ const NewProduct = ({ authObj }: { authObj: TAuthObj }) => {
                                     </>
                                     :
                                     <>
-                                        <LoaderButton handleClick={async () => await Sleep(1990)} displayText='List product' />
+                                        <LoaderButton handleClick={async () => await handleProductList()} displayText='List product' />
                                     </>
                 }
 

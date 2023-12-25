@@ -60,12 +60,46 @@
     color: rgb(78, 0, 0);
 }
 
-
-@media only screen and (max-width: 831px) {
-
-   
-
+.admin-control {
+    position: absolute;
+    grid-template-rows: 33.33% 33.33% 33.33%;
+    height: 100%;
+    width: 100%;
+    display: none;
+    transition: all linear 7000ms;
+    z-index: 1;
 }
+
+.mini-product-main:hover .admin-control {
+    display: grid;
+}
+
+.admin-control button {
+    opacity: 0.9;
+    transition: all linear 400ms;
+}
+.admin-control button svg{
+    height: 33px;
+}
+.admin-control button:hover {
+    opacity: 1;
+}
+
+.admin-control .view {
+    background-color: #51c3d1;
+}
+
+.admin-control .edit {
+    background-color: #e54d4f;
+}
+
+.admin-control .sold {
+    background-color: #5bcd62fa;
+}
+
+
+
+@media only screen and (max-width: 831px) {}
 
 @media only screen and (min-width: 832px) and (max-width: 1200px) {
 

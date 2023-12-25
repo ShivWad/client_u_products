@@ -118,6 +118,31 @@
 /* account-info-parent */
 
 /* user-products */
+.user-products-main {
+    display: grid;
+    grid-template-rows: 60px auto;
+    text-align: center;
+    height: 100%;
+}
+
+.user-products-main.no-grid-row{
+    grid-template-rows:auto;
+
+}
+
+.user-product-header {
+    padding: 1rem;
+    color: aliceblue;
+    background-color: #0f0f1a;
+    height: 50px;
+    font-size: x-large;
+}
+
+.user-product-header svg{
+    float: right;
+    color: aliceblue;
+}
+
 .user-products {
     display: flex;
     flex-wrap: wrap;
@@ -200,17 +225,22 @@
     height: 300px;
 }
 
-.image-input{
+.image-input {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
-.image-input svg{
+
+.image-input svg {
     border: 3px black solid;
     border-width: thin;
     width: 100px;
     height: 100px;
     cursor: pointer;
+}
+
+.image-input .check {
+    color: green;
 }
 
 /* new-product */

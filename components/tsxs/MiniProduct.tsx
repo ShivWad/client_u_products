@@ -1,5 +1,7 @@
 'use client'
 import { TProduct } from '@/types'
+import { faCheck, faEdit, faEye } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 import React from 'react'
 import { useState } from 'react'
@@ -13,7 +15,7 @@ const formatter = new Intl.NumberFormat('en-US', {
 
 });
 
-const MiniProduct = ({ product }: { product: TProduct }) => {
+const MiniProduct = ({ product, admin }: { product: TProduct, admin: boolean }) => {
     const [index, setIndex] = useState(0);
     // Parse the input string to create a Date object
     const inputDate = new Date(product.updatedAt);
@@ -36,6 +38,19 @@ const MiniProduct = ({ product }: { product: TProduct }) => {
                     <span>{formattedDate}</span>
                 </div>
             </div>
+            {admin &&
+                <div className='admin-control'>
+                    <button className='view'>
+                        <FontAwesomeIcon icon={faEye} />
+                    </button>
+                    <button className='edit'>
+                        <FontAwesomeIcon icon={faEdit} />
+                    </button>
+                    <button className='sold'>
+                        <FontAwesomeIcon icon={faCheck} />
+                    </button>
+                </div>
+            }
         </div>
     )
 }

@@ -15,7 +15,7 @@ const page = async () => {
         <div className='product-page'>
             {products.map((product) => {
                 return (
-                    <MiniProduct product={product}  key={`${product._id}`}/>
+                    <MiniProduct admin={false} product={product} key={`${product._id}`} />
                 )
             })}
         </div>

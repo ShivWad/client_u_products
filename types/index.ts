@@ -48,11 +48,31 @@ type TAuthObj = {
     user?: TUser
 }
 
+type TResponseObject = {
+    status: "FAILED" | "SUCCESS",
+    message: string,
+    dbCode?: number,
+    res?: TProduct | TUser | undefined
+}
+
+
+type TListProduct = {
+    name: string,
+    description: string,
+    price: string,
+    city: string,
+    category: string,
+    ownderId: string,
+    ownerName: string
+}
+
 export type {
     TCategories,
     TLocations,
     TUser,
     TProduct,
     TLoginInput,
-    TAuthObj 
+    TAuthObj,
+    TListProduct,
+    TResponseObject
 }

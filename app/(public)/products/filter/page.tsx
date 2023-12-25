@@ -1,6 +1,4 @@
-import { MiniProduct } from '@/components'
-import { TProduct } from '@/types';
-import { NextRequest } from 'next/server';
+
 import React from 'react'
 
 
