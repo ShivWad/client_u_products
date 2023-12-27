@@ -28,8 +28,8 @@ const NewProduct = ({ authObj }: { authObj: TAuthObj }) => {
                     <FontAwesomeIcon icon={faArrowLeft} onClick={() => setStep(step - 1)} />
                 </> :
                     <>
-                        <FontAwesomeIcon icon={faArrowRight} onClick={() => setStep(step + 1)} />
                         <FontAwesomeIcon icon={faArrowLeft} onClick={() => setStep(step - 1)} />
+                        <FontAwesomeIcon icon={faArrowRight} onClick={() => setStep(step + 1)} />
                     </>
                 }
             </div>
