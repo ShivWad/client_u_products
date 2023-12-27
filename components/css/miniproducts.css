@@ -62,38 +62,41 @@
 
 .admin-control {
     position: absolute;
-    grid-template-rows: 33.33% 33.33% 33.33%;
+    grid-template-rows: 33.3333% 33.3333% 33.3333%;
     height: 100%;
     width: 100%;
     display: none;
     transition: all linear 7000ms;
     z-index: 1;
+    display: none;
 }
 
-.mini-product-main:hover .admin-control {
+.mini-product-main:hover .admin-control.active {
     display: grid;
 }
 
-.admin-control button {
+.admin-control.active button {     
     opacity: 0.9;
     transition: all linear 400ms;
 }
-.admin-control button svg{
+
+.admin-control.active button svg {
     height: 33px;
 }
-.admin-control button:hover {
+
+.admin-control.active button:hover {
     opacity: 1;
 }
 
-.admin-control .view {
+.admin-control.active .view {
     background-color: #51c3d1;
 }
 
-.admin-control .edit {
+.admin-control.active .edit {
     background-color: #e54d4f;
 }
 
-.admin-control .sold {
+.admin-control.active .sold {
     background-color: #5bcd62fa;
 }
 

@@ -52,7 +52,7 @@ type TResponseObject = {
     status: "FAILED" | "SUCCESS",
     message: string,
     dbCode?: number,
-    res?: TProduct | TUser | undefined
+    res?: any
 }
 
 

@@ -22,10 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <nav>
-          <div>Jia ho</div>
-        </nav>
-        <main>
+        <main style={{ display: 'grid', placeItems: "center", height: "100vh" }}>
           {children}
         </main>
       </body>

@@ -9,22 +9,24 @@ import { MiniProduct } from '.'
 
 const AccProducts = ({ products }: { products: TProduct[] }) => {
     const router = useRouter();
+    
+    console.log(products.length);
     return (
         <div className={`user-products-main ${products.length ? "" : "no-grid-row"}`}>
-            {products.length > 1 ?
+            {products.length > 0 ?
 
                 <div className='user-product-header'>
                     <span><b>No of products: </b>{products.length}</span>
                     <FontAwesomeIcon icon={faPlus} onClick={() => router.push("/account/products/new")} style={{ display: "flex", alignItems: "center", gap: "20px", cursor: "pointer" }} />
                 </div>
-                : ""
+                : null
             }
             <div className={`user-products ${products.length < 1 ? "no-products" : ""}`}>
                 {products.length > 0 ?
                     products.map((product) => {
                         return (
                             <>
-                                <MiniProduct admin={true} product={product} />
+                                <MiniProduct owner={true} product={product} />
                             </>)
                     })
                     :

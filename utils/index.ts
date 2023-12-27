@@ -155,3 +155,68 @@ export const ListProduct = async (formdata: FormData): Promise<TResponseObject> 
     return responseObj
 }
 
+export const MarkAsSold = async (product_Id: string): Promise<TResponseObject> => {
+    let responseObj: TResponseObject = {
+        status: "FAILED",
+        message: ""
+    }
+    try {
+        const cookieStore = cookies();
+        const token = cookieStore.get("sesAuth");
+
+
+        let user = await checkAuth();
+        console.log(user);
+
+        if (user.status === "SUCCESS") {
+            let body = {
+                product_Id: product_Id,
+                ownerId: user.user?._id
+            }
+            let reqOptions: RequestInit = {
+                method: "PUT",
+                credentials: "include",
+                cache: "no-cache",
+                redirect: "follow",
+                body: JSON.stringify(body)
+            };
+            if (token && token?.value) {
+                reqOptions.headers = {
+                    "Cookie": token.value,
+                    "Content-Type": "application/json"
+                }
+            }
+            else {
+                reqOptions.headers = {
+                    "Content-Type": "application/json",
+                }
+            }
+
+            let res = await fetch(`${process.env.EX_APP_URL}/api/product/mark`, reqOptions);
+
+            console.log(">>>", res.status);
+
+            if (res.status === 200) {
+                let response: TProduct = await res.json();
+                console.log('inside if')
+                responseObj.status = "SUCCESS"
+                responseObj.res = response;
+                return responseObj
+            }
+            else {
+                console.log('inside else')
+                let response: any = await res.json();
+                responseObj = response;
+                responseObj.status = "FAILED";
+            }
+        }
+
+    } catch (error: any) {
+        console.log(error);
+        responseObj.message = error.message;
+        responseObj.status = "FAILED";
+        return responseObj
+    }
+    console.log('inside end')
+    return responseObj
+}

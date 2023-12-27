@@ -1,6 +1,7 @@
 'use client'
-import { TProduct } from '@/types'
-import { faCheck, faEdit, faEye } from '@fortawesome/free-solid-svg-icons'
+import { TProduct, TResponseObject } from '@/types'
+import { MarkAsSold } from '@/utils'
+import { faCheck, faCross, faEdit, faEye, faL, faStop } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 import React from 'react'
@@ -15,8 +16,9 @@ const formatter = new Intl.NumberFormat('en-US', {
 
 });
 
-const MiniProduct = ({ product, admin }: { product: TProduct, admin: boolean }) => {
+const MiniProduct = ({ product, owner }: { product: TProduct, owner: boolean }) => {
     const [index, setIndex] = useState(0);
+    const [sold, setSold] = useState(product.isAvailable);
     // Parse the input string to create a Date object
     const inputDate = new Date(product.updatedAt);
 
@@ -26,8 +28,32 @@ const MiniProduct = ({ product, admin }: { product: TProduct, admin: boolean }) 
         day: "2-digit",
     });
 
+    const handleMarkAsSold = async (product_id: string) => {
+        setSold(true);
+        MarkAsSold(product_id).then((res) => {
+            if (res.status === "SUCCESS") {
+                let updatedProduct: TProduct = res.res;
+                console.log(updatedProduct);
+                if (updatedProduct.isAvailable) {
+                    setSold(true);
+                }
+            }
+            else {
+                console.log(res)
+                setSold(false);
+            }
+        }).catch((reason: TResponseObject) => {
+            console.log(reason);
+            setSold(false);
+        });
+    }
+
     return (
-        <div onClick={() => window.open(`/product/${product._id}`, '_blank')} className={'mini-product-main'}>
+        <div
+            onClick={() => {
+                if (!owner) window.open(`/product/${product._id}`, '_blank');
+            }}
+            className={`mini-product-main ${owner ? "active" : ""} ${product.isAvailable || sold ? "sold" : ""}`}>
             <Image className={'mini-product-image'} fill={true} src={product.images[index]} alt='err' />
             <div className={"mini-pro-info"}>
                 <p className={'name'}>{product.name}</p>
@@ -38,20 +64,19 @@ const MiniProduct = ({ product, admin }: { product: TProduct, admin: boolean }) 
                     <span>{formattedDate}</span>
                 </div>
             </div>
-            {admin &&
-                <div className='admin-control'>
-                    <button className='view'>
-                        <FontAwesomeIcon icon={faEye} />
-                    </button>
-                    <button className='edit'>
-                        <FontAwesomeIcon icon={faEdit} />
-                    </button>
-                    <button className='sold'>
-                        <FontAwesomeIcon icon={faCheck} />
-                    </button>
-                </div>
-            }
-        </div>
+
+            <div className={`admin-control ${owner ? "active" : ""}`}>
+                <button className='view'>
+                    <FontAwesomeIcon icon={faEye} onClick={() => window.open(`/product/${product._id}`, "_blank")} />
+                </button>
+                <button className='edit' onClick={() => window.open(`/account/product/edit/${product._id}`)}>
+                    <FontAwesomeIcon icon={faEdit} />
+                </button>
+                <button className='sold' onClick={() => handleMarkAsSold(product._id)}>
+                    {sold ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faStop} />}
+                </button>
+            </div>
+        </div >
     )
 }
 export default MiniProduct  
